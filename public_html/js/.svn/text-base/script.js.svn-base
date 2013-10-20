@@ -1,0 +1,461 @@
+var timer1, timer2, timer3, timer4, timer5, timer6, timer7,click = false, currentvid,video,currentCarousel,carouselObjects,carouselFadeDuration = 1.0,carouselProcessing,carouselList,pe,carouselSpeed = 5, thumbnailSliding,slider,counter = 0,popupSliding,numberScrolled,popupscrolled;
+
+document.observe('dom:loaded', function () {
+	inspireMe();
+});
+function inspireMe(){
+	var gallery = $('gallery');
+	if(gallery){
+		var inspire = new Gallery();
+	}
+}
+Gallery = Class.create({
+	initialize: function () {
+		this.setClickEvents();
+		this.showImages();
+	},
+	setClickEvents: function () {
+		$('scroll-left').observe('click', (function(event){
+			if( click === false)
+			{
+				click = true;
+				this.scrollLeft();
+			}
+		}).bind(this));
+		$('scroll-right').observe('click', (function(event){
+			if( click === false)
+			{
+				click = true;
+				this.scrollRight();
+			}
+		}).bind(this));
+	},
+	showImages: function(){
+		var images = $$('div.image-holder');
+		var i = 0;
+		images.each(function (image) {
+			i++;
+			switch(i)
+			{
+				case 1:
+					image.className = 'image-holder one';
+					break;
+				case 2:
+					image.className = 'image-holder two';
+					break;
+				case 3:
+					image.className = 'image-holder three';
+					break;
+				case 4:
+					image.className = 'image-holder four';
+					break;
+				case 5:
+					image.className = 'image-holder five';
+					break;
+			}
+		});
+	},
+	scrollLeft: function () {
+		var holder = $('gallery-inner');
+		var images = $$('div.image-holder');
+		var one = holder.getElementsByClassName('one');
+		var two = holder.getElementsByClassName('two');
+		var three = holder.getElementsByClassName('three');
+		var four = holder.getElementsByClassName('four');
+		var five = holder.getElementsByClassName('five');
+		if(one[0])
+		{
+			var child1 = one[0].children[0];
+			var number1 = one[0];
+			timer1 = setInterval( function () {scrollOne(number1,child1,'L'); }, 5);
+		}
+		if(two[0])
+		{
+			var number2 = two[0];
+			var child2 = two[0].children[0];
+			timer2 = setInterval( function () {scrollTwo(number2,child2,'L'); }, 5);
+		}
+		if(three[0])
+		{
+			var number3 = three[0];
+			var child3 = three[0].children[0];
+			timer3 = setInterval( function () {scrollThree(number3,child3,'L'); }, 5);
+		}
+		if(four[0])
+		{
+			var number4 = four[0];
+			number4.style.zIndex = 3;
+			var child4 = four[0].children[0];
+			timer4 = setInterval( function () {scrollFour(number4,child4,'L'); }, 5);
+		}
+		if(five[0])
+		{
+			var number5 = five[0];
+			var child5 = five[0].children[0];
+			timer5 = setInterval( function () {scrollFive(number5,child5,'L'); }, 5);
+		}
+	},
+	scrollRight: function () {
+		var holder = $('gallery-inner');
+		var images = $$('div.image-holder');
+		var one = holder.getElementsByClassName('one');
+		var two = holder.getElementsByClassName('two');
+		var three = holder.getElementsByClassName('three');
+		var four = holder.getElementsByClassName('four');
+		var five = holder.getElementsByClassName('five');
+		if(one[0])
+		{
+			var child1 = one[0].children[0];
+			var number1 = one[0];
+			timer1 = setInterval( function () {scrollOne(number1,child1,'R'); }, 5);
+		}
+		if(two[0])
+		{
+			var number2 = two[0];
+			number2.style.zIndex = 4;
+			var child2 = two[0].children[0];
+			timer2 = setInterval( function () {scrollTwo(number2,child2,'R'); }, 5);
+		}
+		if(three[0])
+		{
+			var number3 = three[0];
+			var child3 = three[0].children[0];
+			if(three[0].children[1]){
+				three[0].children[1].hide();
+			}
+			timer3 = setInterval( function () {scrollThree(number3,child3,'R'); }, 5);
+		}
+		if(four[0])
+		{
+			var number4 = four[0];
+			var child4 = four[0].children[0];
+			timer4 = setInterval( function () {scrollFour(number4,child4,'R'); }, 5);
+		}
+		if(five[0])
+		{
+			var number5 = five[0];
+			var child5 = five[0].children[0];
+			timer5 = setInterval( function () {scrollFive(number5,child5,'R'); }, 5);
+		}
+	},
+});
+function scrollOne(element, image, direction){
+	if( element.style.left === '' ){
+		element.style.left = '0px';
+	}
+	var left = element.style.left.split('px');
+	if( parseInt(left[0]) > -50  && parseInt(left[0]) < 50 ){
+		if(image.style.height == '' ){
+			image.style.height = '50%';
+		}
+		var height = image.style.height.split('%');
+		var j = parseFloat(height[0]);
+		if( element.style.top === '' ){
+			element.style.top = '100px'
+		}
+		var top = element.style.top.split('px');
+		var k = parseFloat(top[0]);
+		if( direction === 'L' ){
+			//j = j - 0.5;
+		}
+		else{
+			j = j + 0.5;
+		}
+		image.style.height = j + '%';
+		image.style.width = j + '%';
+		var i = parseInt(left[0]);
+		if( direction === 'L' ){
+			i = i - 1;
+		}
+		else{
+			i = i + 1;
+			k = parseFloat(k) - parseFloat(1);
+		}
+		element.style.left = i + 'px'; 
+		element.style.top = k + 'px';
+	}
+	else{
+		if( direction === 'L')
+		{
+			element.className = 'image-holder inactive';
+			element.style.left = '530px';
+		}
+		else{
+			element.className = 'image-holder two';
+		}
+		clearInterval(timer1);
+		click = false;
+	}
+}
+function scrollTwo(element,image,direction){
+	if( element.style.left === '' ){
+		element.style.left = '50px';
+	}
+	var left = element.style.left.split('px');
+	if( parseInt(left[0]) > 0 && parseInt(left[0]) < 100){
+		if(image.style.height == '' ){
+			image.style.height = '75%';
+		}
+		var height = image.style.height.split('%');
+		var j = parseFloat(height[0]);
+		if( element.style.top === '' ){
+			element.style.top = '50px'
+		}
+		var top = element.style.top.split('px');
+		var k = parseFloat(top[0]);
+		if( direction === 'L' ){
+			j = j - 0.5;
+		}
+		else{
+			j = j + 0.5;
+		}
+		image.style.height = j + '%';
+		image.style.width = j + '%';
+		var i = parseInt(left[0]);
+		if( direction === 'L' ){
+			i = i - 1;
+			k = parseFloat(k) + parseFloat(1);
+		}
+		else{
+			i = i + 1;
+			k = parseFloat(k) - parseFloat(1); 
+		}
+		element.style.left = i + 'px';
+		element.style.top = k + 'px';		
+	}
+	else{
+		if( direction === 'L')
+		{
+			element.className = 'image-holder one';
+		}
+		else{
+			element.className = 'image-holder three';
+			if(element.children[1]){
+				element.children[1].appear();
+			}
+			element.style.zIndex = '';
+		}
+		clearInterval(timer2);
+	}
+}
+function scrollThree(element,image,direction){
+	if( element.style.left === '' ){
+		element.style.left = '100px';
+	}
+	var left = element.style.left.split('px');
+	if( parseFloat(left[0]) > 50 && parseFloat(left[0]) < 308){
+		if(image.style.height == '' ){
+			image.style.height = '100%';
+		}
+		if( element.style.top === '' ){
+			element.style.top = '0px'
+		}
+		var top = element.style.top.split('px');
+		var k = parseFloat(top[0]);
+		var height = image.style.height.split('%');
+		var j = parseFloat(height[0]);
+		j = j - 0.5;
+		image.style.height = j + '%';
+		image.style.width = j + '%';
+		var i = parseFloat(left[0]);
+		if( direction === 'L' ){
+			i = i - 1;
+			k = parseFloat(k) + parseFloat(1);
+		}
+		else{
+			i = parseFloat(i) + parseFloat(4.2);
+			k = parseFloat(k) + parseFloat(1);
+		}
+		element.style.left = i + 'px'; 
+		element.style.top = k + 'px';
+	}
+	else{
+		if( direction === 'L')
+		{
+			element.className = 'image-holder two';
+		}
+		else{
+			element.style.zIndex = '';
+			element.className = 'image-holder four';
+			element.style.left = '310px';
+		}
+		clearInterval(timer3);	
+	}
+}
+function scrollFour(element,image,direction){
+	if( element.style.left === '' ){
+		element.style.left = '310px';
+	}
+	var left = element.style.left.split('px');
+	if( parseInt(left[0]) > 100 && parseFloat(left[0]) < 528 ){
+		if(image.style.height == '' ){
+			image.style.height = '75%';
+		}
+		if( element.style.top === '' ){
+			element.style.top = '50px'
+		}
+		var top = element.style.top.split('px');
+		var k = parseFloat(top[0]);
+		var height = image.style.height.split('%');
+		var j = parseFloat(height[0]);
+		if( direction === 'L' ){
+			j = j + 0.5;
+		}
+		else{
+			j = j - 0.5;
+		}
+		image.style.height = j + '%';
+		image.style.width = j + '%';
+		var i = parseFloat(left[0]);
+		if( direction === 'L' ){
+			i = parseFloat(i) - parseFloat(4.2);
+			k = parseFloat(k) - parseFloat(1);
+		}
+		else{
+			i = parseFloat(i) + parseFloat(4.4);
+			k = parseFloat(k) + parseFloat(1);
+		}
+		element.style.left = i + 'px'; 
+		element.style.top = k + 'px';
+	}
+	else{
+		if( direction === 'L')
+		{
+			element.className = 'image-holder three';
+			element.style.left = '100px';
+			element.style.zIndex = '';
+			if(element.children[1]){
+				element.children[1].appear();
+			}
+		}
+		else{
+			element.className = 'image-holder five';
+			element.style.left = '530px';
+		}
+		clearInterval(timer4);
+	}
+}
+function scrollFive(element,image,direction){
+	if( element.style.left === '' ){
+		element.style.left = '530px';
+	}
+	var left = element.style.left.split('px');
+	if( parseInt(left[0]) > 310 && parseFloat(left[0]) < 680){
+		if(image.style.height == '' ){
+			image.style.height = '50%';
+		}
+		if( element.style.top === '' ){
+			element.style.top = '100px'
+		}
+		var top = element.style.top.split('px');
+		var k = parseFloat(top[0]);
+		var height = image.style.height.split('%');
+		var j = parseFloat(height[0]);
+		if( direction === 'L' ){
+			j = j + 0.5;
+		}
+		else{
+			//j = j - 0.5;
+		}
+		image.style.height = j + '%';
+		image.style.width = j + '%';
+		var i = parseFloat(left[0]);
+		if( direction === 'L' ){
+			i = parseFloat(i) - parseFloat(4.4);
+			k = parseFloat(k) - parseFloat(1);
+		}
+		else{
+			i = i + 3;
+		}
+		element.style.left = i + 'px'; 
+		element.style.top = k + 'px';
+	}
+	else{
+		if( direction === 'L')
+		{
+			element.className = 'image-holder four';
+			element.style.left = '310px';
+			getNewLastElement();
+		}
+		else{
+			element.className = 'image-holder inactive';
+			element.style.left = '0px';
+			getNewFirstElement();
+		}
+		clearInterval(timer5);
+	}
+}
+function getNewFirstElement(){
+	var images = $$('div.image-holder');
+	var i = 0;
+	var one, two;
+	images.each( function(image){
+		if(image.className === 'image-holder two'){
+			two = i;
+		}
+		i++;
+	});
+	one = two - 1;
+	if( one < 0 ){
+		one = images.length - 1;
+	}
+	images[one].className = 'image-holder one';
+	images[one].style.left = '0px';
+}
+function getNewLastElement(){
+	var images = $$('div.image-holder');
+	var i = 0;
+	var four, five;
+	images.each( function(image){
+		if(image.className === 'image-holder four'){
+			four = i;
+		}
+		i++;
+	});
+	five = four + 1;
+	if( five > images.length - 1 ){
+		five = 0;
+	}
+	images[five].className = 'image-holder five';
+	images[five].style.left = '530px';
+}
+function getPageSize() {
+		var xScroll, yScroll, windowWidth, windowHeight, pageWidth, pageHeight;
+		if (window.innerHeight && window.scrollMaxY) {
+			xScroll = window.innerWidth + window.scrollMaxX;
+			yScroll = window.innerHeight + window.scrollMaxY;
+		} else if (document.body.scrollHeight > document.body.offsetHeight) {
+			xScroll = document.body.scrollWidth;
+			yScroll = document.body.scrollHeight;
+		} else {
+			xScroll = document.body.offsetWidth;
+			yScroll = document.body.offsetHeight;
+		}
+		if (self.innerHeight) {	// all except Explorer
+			if (document.documentElement.clientWidth) {
+				windowWidth = document.documentElement.clientWidth;
+			} else {
+				windowWidth = self.innerWidth;
+			}
+			windowHeight = self.innerHeight;
+		} else if (document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode
+			windowWidth = document.documentElement.clientWidth;
+			windowHeight = document.documentElement.clientHeight;
+		} else if (document.body) { // other Explorers
+			windowWidth = document.body.clientWidth;
+			windowHeight = document.body.clientHeight;
+		}
+		// for small pages with total height less then height of the viewport
+		if (yScroll < windowHeight) {
+			pageHeight = windowHeight;
+		} else {
+			pageHeight = yScroll;
+		}
+		// for small pages with total width less then width of the viewport
+		if (xScroll < windowWidth) {
+			pageWidth = xScroll;
+		} else {
+			pageWidth = windowWidth;
+		}
+		return [pageWidth, pageHeight];
+}

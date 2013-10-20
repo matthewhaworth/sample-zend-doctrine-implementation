@@ -1,0 +1,261 @@
+body{
+	font-family: "Verdana" ,Geneva,sans-serif;
+	/*font-family: Calibri;*/
+	margin:0;
+	font-size:12px;
+}
+h1{
+	margin:5px 0;
+}
+a{
+	color:inherit;
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:underline;
+}
+div#wrapper{
+	width:1000px;
+	margin:auto;
+	padding:0 23px;
+	background:url("../images/border.png") 0 0 repeat-y;
+}
+div#content{
+	overflow:hidden;
+	padding: 0 50px;
+}
+/*****************HEADER*************/
+div#header{
+	position:relative;
+	background: url("../images/header-new.png") 0 0 no-repeat;
+	height:331px;
+}
+div#header ul#navigation{
+	position:absolute;
+	right:30px;
+	list-style:none;
+	color:white;
+	font-size:23px;
+	top:232px;
+	margin:0;
+	padding:0;
+}
+div#header ul#navigation li.link{
+	float:left;
+	padding:15px 34px;
+	cursor:pointer;
+}
+div.dropdown{
+	display:none;
+	position:absolute;
+	background:#476116;
+	top:53px;
+	font-size:14px;
+	z-index:20;
+}
+div.dropdown ul.dropdown-list{
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+div.dropdown ul.dropdown-list li{
+	border-top:1px solid #000;
+	border-bottom: 1px solid #608038;
+}
+div.dropdown ul.dropdown-list li a{
+	padding:10px 10px;
+	display:block;
+	width:140px;
+}
+div.dropdown ul.dropdown-list li:first-child{
+	border-top:1px solid #6D963A;
+}
+div.dropdown ul.dropdown-list li:hover{
+	background:#608038;
+}
+div#header ul#navigation li.link:hover div.dropdown{
+	display:block;
+}
+/**************FOOTER ***********************/
+div#footer{
+	height:77px;
+	background:url("../images/footer-background.png") 0 0 no-repeat;
+	position:relative;
+}
+div#footer ul#footer-links{
+	list-style:none;
+	color:white;
+	margin:0px;
+	padding:0px;
+	position:absolute;
+	left: 300px;
+	top: 30px;
+}
+div#footer ul#footer-links li{
+	float:left;
+	border-right: 1px solid white;
+	padding:0px 25px;
+	cursor:pointer;
+}
+div#footer ul#footer-links li:hover{
+	text-decoration:underline;
+}
+div#footer ul#footer-links li:last-child{
+	border-right:none;
+}
+
+/************ HOMEPAGE *****************/
+div#news{
+	width:650px;
+	float:left;
+	overflow:hidden;
+}
+div#twitter{
+	width:250px;
+	float:left;
+}
+div.posted{
+	margin-bottom:20px;
+}
+div.posted span{
+	color:#0066FF;
+}
+ h2{
+	color:#264a04;
+}
+/**** BAND ROOM ***/
+div#band-room{
+}
+.highlight{
+	color:#0066FF;
+}
+div#google-map{
+	float:left;
+	margin-right:20px;
+}
+div#address{
+	width:200px;
+	float:left;
+}
+address{
+	margin-top:20px;
+	font-size:16px;
+	font-style:normal;
+}
+/** CONTACT US ***/
+div#contact-us{
+	overflow:hidden;
+}
+div.contact{
+	float:left;
+	width:280px;
+}
+div.social-link {
+	overflow:hidden;
+	padding: 20px 0;
+}
+div.social-link h2,
+div.social-link img{
+	float:left;
+}
+div.social-link h2{
+	width: 280px;
+	margin:0;
+}
+/*** SUPPORT ***/
+div#support{
+	text-align:center;
+}
+div#support p{
+	text-align:left;
+}
+/*** GALLERY **/
+div#gallery{
+	position:relative;
+}
+/********* INSPIRE ME*******/
+div#gallery-content{
+	margin:0 20px;
+}
+div#gallery{
+	position: relative;
+}
+div#gallery-inner{
+	height: 450px;
+	position: relative;
+	margin: auto;
+	width: 850px;
+	overflow:hidden;
+}
+div#gallery div.image-holder.inactive{
+	display:none;
+}
+div#gallery div.image-holder{
+	height: 310px;
+	width: 582px;
+	position:absolute;
+}
+div#gallery div.image-holder h2 span{
+	color:#BBCB8B;
+}
+div#gallery div.image-holder img{
+	border: 10px solid white;
+	vertical-align: middle;
+}
+div#gallery div.image-holder.inactive,
+div#gallery div.image-holder.one,
+div#gallery div.image-holder.five{
+	z-index:1;
+	top:100px;
+}
+div#gallery div.image-holder.two,
+div#gallery div.image-holder.four{
+	z-index:2;
+	top:50px;
+}
+div#gallery div.image-holder.three{
+	z-index:3;
+}
+div#gallery div.image-holder.one{
+	left:0px;
+}
+div#gallery div.image-holder.two{
+	left:50px;
+}
+div#gallery div.image-holder.three{
+	left:100px;
+}
+div#gallery div.image-holder.four{
+	left:310px;
+}
+div#gallery div.image-holder.five{
+	left:530px;
+}
+div#gallery div.image-holder.inactive img,
+div#gallery div.image-holder.one img,
+div#gallery div.image-holder.five img{
+	height:50%;
+	width:50%;
+}
+div#gallery div.image-holder.two img,
+div#gallery div.image-holder.four img{
+	height:75%;
+	width:75%;
+}
+div#gallery div#scroll-left,
+div#gallery div#scroll-right{
+	position:absolute;
+	top:140px;
+	width:40px;
+	height:40px;
+	cursor:pointer;
+}
+div#gallery div#scroll-left{
+	left:0px;
+	background: url('../images/arrow-backward.png') 0 0 no-repeat;
+}
+div#gallery div#scroll-right{
+	right:0px;
+	background: url('../images/arrow-forward.png') 0 0 no-repeat;
+	z-index:10;
+}

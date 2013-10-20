@@ -1,5 +1,7 @@
 INSTALL.txt
 LICENSE.txt
 README.txt
+library/Zend
+library/Doctrine
 demos/
 extras/documentation

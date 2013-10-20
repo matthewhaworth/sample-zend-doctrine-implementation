@@ -1,0 +1,11 @@
+<h1>Support the Band</h1>
+<div id="support">
+    <p>Eagley is a self-sufficient band. Income comes largely from concerts and from successful contests. The Band also has a 200 club where each member of the band buys a number for £1 a month and has a chance of winning £5 or £20 at each monthly draw. Twice a year we have a super draw where you have the chance of winning £100!!
+        If you would like to buy a number and become a friend of Eagley Band then please <a class="highlight" href="contact-us.html">contact us</a></p>
+    <h2>New CD!</h2>
+    <p>We are very proud of our newly released CD Jubilation which was published just before Christmas. This contains 15 excellent tracks, showcasing some of the bands fine soloists. Contact any member of the band for details. Tracks include everything from hymn tunes to film music, traditional marches to way out west and show music. Pick up your copy for £10.</p>
+    <img src="/images/eagley-band-cd.png" alt="Eagley Band CD"/>
+    <p>Eagley Band also have a <a href="http://www.easyfundraising.org.uk" class="highlight">Easyfunraising.org.uk</a> page which is a easy way to support the band and best of all it won't cost you a penny!</p>
+    <!-- Here's my badge to show support for Eagley Brass Band. They raise funds with easyfundraising.org.uk -->
+    <a href="http://www.easyfundraising.org.uk/causes/ebb/?badge=mycause_large_5UDI02_38A68Y.png&amp;u=38A68Y&amp;urp=38A68Y" class="easyfundraisingBadge"><img src="http://www.easyfundraising.org.uk/images/thanks-for-badging/mycause_large_5UDI02_38A68Y.png" border="0" alt="easyfundraising.org.uk"></a>
+</div>

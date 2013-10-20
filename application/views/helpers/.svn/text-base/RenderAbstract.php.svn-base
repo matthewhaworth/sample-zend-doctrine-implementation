@@ -1,0 +1,88 @@
+<?php
+abstract class Application_View_Helper_RenderAbstract extends Zend_View_Helper_Abstract
+{
+    /**
+     * @var Gravity_Xml
+     */
+    protected $_messages;
+        
+    public function __construct() {
+        $this->_messages = new Gravity_Xml($this->_getMessageXmlPath(), 0, true);
+    }
+    
+    protected function _render(Application_Model_Entities_Feed_Abstract $feedItem, $perspective = null)
+    {
+        if (is_null($perspective)) {
+            $perspective = $feedItem->getSubjectTaggableType();
+        }
+        
+        $xpath = implode('/', array($perspective, $feedItem->getMessageCode()));
+        $messageInfo = $this->_messages->getXPathArray($xpath);
+        
+        if (!$messageInfo || !count($messageInfo)) {
+            Gravity_Core::log("Failed to fetch message xpath: {$xpath}");
+            return;
+        }
+        
+        if (!array_key_exists('partial', $messageInfo)) {
+            $messageInfo['partial'] = 'activities/default.phtml';
+        }
+                
+        $view = new Zend_View(array('basePath' => $this->_getBaseViewDir()));
+        $view->message = $this->_untokenise($messageInfo['message'], $this->_getTaggablesArray($feedItem));
+        if ($feedItem->getExtraText()) {
+            $view->text = $feedItem->getExtraText();
+        }
+        
+        return $view->render($messageInfo['partial']);
+    }
+    
+    protected function _untokenise($message, $taggableArray) {
+        $tokens = array_keys($taggableArray);
+
+        foreach($tokens as $_token) {
+            $message = str_replace(
+                "[{$_token}]",
+                $this->_getHrefHtml(
+                    $taggableArray[$_token]['type'],
+                    $taggableArray[$_token]['code'],
+                    $taggableArray[$_token]['name']
+                ),
+                $message
+            );
+        }
+        
+        return $message;
+    }
+    
+    protected function _getTaggablesArray(Application_Model_Entities_Feed_Abstract $feedItem)
+    {
+        $taggableHtmlArray = array();
+        $taggableHtmlArray['subject'] = array(
+            'type' => $feedItem->getSubjectTaggableType(),
+            'code' => $feedItem->getSubjectTaggableCode(),
+            'name' => $feedItem->getSubjectTaggableName(),
+        );
+        
+        foreach ($feedItem->getTaggables() as $_key => $_taggable) {
+            $taggableHtmlArray["taggable{$_key}"] = $_taggable;
+        }
+        
+        return $taggableHtmlArray;
+    }
+    
+    protected function _getHrefHtml($taggableType, $taggableCode, $taggableName)
+    {
+        return "<a href='/{$taggableType}/view/taggable/{$taggableCode}'>{$taggableName}</a>";
+    }
+    
+    protected function _getBaseViewDir()
+    {
+        $frontController = Zend_Controller_Front::getInstance();
+        $dirs = $frontController->getControllerDirectory();
+        $module = $frontController->getDispatcher()->getDefaultModule();
+        return dirname($dirs[$module]) . DIRECTORY_SEPARATOR . 'views';
+    }
+    
+    abstract protected function _getMessageXmlPath();
+}

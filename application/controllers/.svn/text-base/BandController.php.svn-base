@@ -1,0 +1,18 @@
+<?php
+class BandController extends Zend_Controller_Action
+{
+    public function supportTheBandAction()
+    {
+        
+    }
+    
+    public function theBandRoomAction()
+    {
+        
+    }
+    
+    public function galleryAction()
+    {
+        
+    }
+}

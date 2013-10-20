@@ -1,0 +1,12 @@
+<?php
+class Application_View_Helper_RenderNotification extends Application_View_Helper_RenderAbstract
+{
+    protected function _getMessageXmlPath() {
+        return APPLICATION_PATH . '/data/notificationMessages.xml';
+    }
+    
+    public function renderNotification(Application_Model_Entities_Notification $notification)
+    {
+        return $this->_render($notification, 'user');
+    }
+}
